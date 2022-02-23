@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<ul>
+<li><a href="/user/login.html"> 로그인 페이지</a></li>
+		<li><a href="/user/join.html"> 회원가입 페이지</a></li>
+		<li><a href="/user/userInfo.jsp"> 회원정보 페이지</a></li>
+		<li><a href="/post/list.html"> 글 목록 페이지</a></li>
+	</ul>
+	
+	<%
+	request.getReader(); // buffered reader: 상대방이 보낸 모든 정보를 string으로 받을 수 있다. 
+	request.getParameter("name");
+	
+	//db연결 -> select 하면 동적인 페이지가 된다. 
+	String name = "황주원";
+	String phone = "01045458787";
+	%>
+<h1>회원정보  페이지 입니다 - 인증필요</h1>
+<h3>성함: <%=name%> 전화번호: <%=phone %></h3>
+<hr/>
+</body>
+</html>

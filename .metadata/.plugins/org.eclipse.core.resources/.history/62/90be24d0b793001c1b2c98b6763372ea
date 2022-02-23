@@ -1,0 +1,59 @@
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<ul>
+		<li><a href="/user/login.html"> 로그인 페이지</a></li>
+		<li><a href="/user/join.html"> 회원가입 페이지</a></li>
+		<li><a href="/user/userInfo.jsp"> 회원정보 페이지</a></li>
+		<li><a href="/post/list.html"> 글 목록 페이지</a></li>
+	</ul>
+
+	<%
+	//request는 bufferedreader로 읽는 모든 정보를 자바 오브젝트로 바꾼 결정체(톰캣이 해줌)
+	//http://localhost/user/userInfo.jsp?name=황주원
+	// request.getReader(); // buffered reader: 상대방이 보낸 모든 정보를 string으로 받을 수 있다. 
+	//getParameter() 쿼리스트링 파싱해주는 메소드 
+	//String name = request.getParameter("name");
+ //String phone = request.getParameter("phone");
+ 
+ //1.table생성
+ 
+ //2. 쿼리스트링 파싱
+	int id = Integer.parseInt(request.getParameter("id"));
+	
+	//3. 디비연결코드
+		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","SCOTT","TIGER");
+
+	//4. select로 id, name, phone받기
+	String sql = "SELECT id, name, phone FROM userInfo";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+ResultSet rs = pstmt.executeQuery();
+
+
+while (rs.next()) { 
+				System.out.println("id: " + rs.getInt("id"));
+				System.out.println("name: " + rs.getString("name"));
+				System.out.println("phone: " + rs.getInt("phone"));
+
+	
+	//5. 뿌려주기,,, 아래 아이디 , 이름, 전번에 넣으면 됨 
+	
+	
+	//db연결 -> select 하면 동적인 페이지가 된다. 
+  // String name = "황주원";
+	//String phone = "01045458787";
+	%>
+
+	<h1>회원정보 페이지 입니다 - 인증필요</h1>
+<h3> 아이디: <%=id%> 이름: <%= name%> 전화번호: <%= phone %></h3>
+	<hr />
+</body>
+</html>
