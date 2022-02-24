@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 public class DBConn {
 
 	//책임: 이미 만들어진 connection객체를 return시킴
+	//conn을 여러개 들고 있고 거기서 안 쓰고 있는걸 찾아서 준다. 
 	public static Connection getConnection() {
 Connection conn = null;
 		try {
